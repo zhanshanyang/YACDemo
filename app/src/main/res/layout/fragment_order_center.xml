@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yangaiche.yackeeper.fragment.OrderCenterFragment">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_order_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabMode="scrollable"
+        android:background="@android:color/holo_red_dark"
+        app:tabPaddingStart="@dimen/screen_edge_horizontal_margin"
+        app:tabPaddingEnd="@dimen/screen_edge_horizontal_margin" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager_order_center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
