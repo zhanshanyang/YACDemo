@@ -1,6 +1,5 @@
 package com.yangaiche.yackeeper.login.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.Button;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.yangaiche.yackeeper.R;
-import com.yangaiche.yackeeper.base.BasePresenter;
 import com.yangaiche.yackeeper.base.MVPBaseActivity;
 import com.yangaiche.yackeeper.login.presenter.UserLoginPresenter;
 
@@ -40,7 +38,7 @@ public class UserLoginActivity extends MVPBaseActivity<IUserLoginView, UserLogin
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.btn_login_ok){
-            mPresenter.login(getUserName(), getUserPassword());
+            mPresenter.login(this, getUserName(), getUserPassword());
         }
     }
 
@@ -74,7 +72,6 @@ public class UserLoginActivity extends MVPBaseActivity<IUserLoginView, UserLogin
 
     @Override
     protected UserLoginPresenter createPresenter() {
-        mPresenter = new UserLoginPresenter();
-        return mPresenter;
+        return new UserLoginPresenter();
     }
 }

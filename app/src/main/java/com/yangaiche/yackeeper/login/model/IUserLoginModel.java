@@ -5,4 +5,6 @@ package com.yangaiche.yackeeper.login.model;
  */
 public interface IUserLoginModel {
 
+    void userLogin(String userName, String userPassword, UserCallBack userCallBack);
+
 }
