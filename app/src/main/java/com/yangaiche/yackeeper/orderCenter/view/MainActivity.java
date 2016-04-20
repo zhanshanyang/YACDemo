@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         if(!AcountUtils.ensureAccountAvailability(this)){
-            return;
+            finish();
         }
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

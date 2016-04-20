@@ -1,5 +1,7 @@
 package com.yangaiche.yackeeper.login.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,6 +27,12 @@ public class UserLoginActivity extends MVPBaseActivity<IUserLoginView, UserLogin
     Button btn_login_ok;
     @Bind(R.id.progress)
     MaterialProgressBar progress;
+
+    public static Intent makeIntent(Context context, Intent onAddedIntent){
+        Intent intent = new Intent(context, UserLoginActivity.class);
+        intent.putExtra(UserLoginActivity.EXTRA_ON_ADDED_INTENT, onAddedIntent);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,13 @@ public class UserLoginActivity extends MVPBaseActivity<IUserLoginView, UserLogin
 
     @Override
     public void loginSuccess() {
+        Intent onAddedIntent = getIntent().getParcelableExtra(UserLoginActivity.EXTRA_ON_ADDED_INTENT);
+        if(onAddedIntent != null)
+            try {
+                startActivity(onAddedIntent);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         finish();
     }
 
