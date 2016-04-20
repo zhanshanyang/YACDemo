@@ -106,8 +106,10 @@ public class OrderCenterFragment extends Fragment {
         mListener = null;
     }
 
+    /**
+     * 调用父activity接口
+     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

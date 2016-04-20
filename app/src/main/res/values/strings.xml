@@ -1,9 +1,10 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
-    <string name="app_name">YACKeeper</string>
+    <string name="app_name">养爱车管家</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="action_order_center">订单中心</string>
     <string name="action_use_center">个人中心</string>
     <string name="action_leave">请假</string>
     <string name="action_version_update">版本更新</string>

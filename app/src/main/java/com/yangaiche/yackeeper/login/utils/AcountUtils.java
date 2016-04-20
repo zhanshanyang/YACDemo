@@ -1,6 +1,5 @@
 package com.yangaiche.yackeeper.login.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -16,24 +15,24 @@ public class AcountUtils {
 
     /**
      * 判断用户是否有可使用账户,不能使用，则打开登录界面
-     * @param activity
+     * @param context
      */
-    public static boolean ensureAccountAvailability(Activity activity) {
-        boolean accountAvailable = hasAccount(activity);
+    public static boolean ensureAccountAvailability(Context context) {
+        UserAccount userAccount = getUserAccount(context);
+        boolean accountAvailable = (userAccount != null && userAccount.token != null);
         if(!accountAvailable) {
-            addAccount(activity);
+            addAccount(context);
         }
         return accountAvailable;
     }
 
-    public static boolean hasAccount(Context context) {
-        UserAccount userACcount = (UserAccount) MySharedPreferences.getInstance(context).getString4Class(MySharedPreferences.USER_ACCOUNT_SP, UserAccount.class);
-        return userACcount != null && userACcount.token != null;
+    public static UserAccount getUserAccount(Context context){
+        return (UserAccount) MySharedPreferences.getInstance(context).getString4Class(MySharedPreferences.USER_ACCOUNT_SP, UserAccount.class);
     }
 
-    public static void addAccount(Activity activity) {
-        Intent onAddedIntent = new Intent(activity, MainActivity.class);
-        activity.startActivity(UserLoginActivity.makeIntent(activity, onAddedIntent));
+    public static void addAccount(Context context) {
+        Intent onAddedIntent = new Intent(context, MainActivity.class);
+        context.startActivity(UserLoginActivity.makeIntent(context, onAddedIntent));
     }
 
 }

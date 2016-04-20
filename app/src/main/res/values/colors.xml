@@ -6,4 +6,6 @@
     <color name="cyan_500">#00bcd4</color>
     <color name="transparent">#00000000</color>
     <color name="helf_transparent">#d0000000</color>
+    <color name="yac_color">#04b96a</color>
+    <color name="white">#FFFFFF</color>
 </resources>
