@@ -71,6 +71,21 @@ public class UserLoginActivity extends MVPBaseActivity<IUserLoginView, UserLogin
     }
 
     @Override
+    public void showProgressDialog() {
+        progress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void loginSuccess() {
+        finish();
+    }
+
+    @Override
     protected UserLoginPresenter createPresenter() {
         return new UserLoginPresenter();
     }

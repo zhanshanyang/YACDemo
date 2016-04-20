@@ -2,7 +2,6 @@ package com.yangaiche.yackeeper.login.model;
 
 import com.google.gson.Gson;
 import com.yangaiche.yackeeper.utils.NetUtils;
-import com.yangaiche.yackeeper.utils.URLVersion;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +11,7 @@ import java.util.Map;
  */
 public class UserLoginModel implements IUserLoginModel {
 
-    private static String USER_LOGIN_URL = "/car_keeper/sign_in.json"; // vi
+    private static String USER_LOGIN_URL = "/car_keeper/sign_in.json";
 
     @Override
     public void userLogin(String userName, String userPassword, UserCallBack userCallBack) {
@@ -20,6 +19,6 @@ public class UserLoginModel implements IUserLoginModel {
         params.put("phone", userName);
         params.put("password", userPassword);
         String json_str = new Gson().toJson(params);
-        NetUtils.postString(USER_LOGIN_URL, URLVersion.URL_VERSION_ONE, json_str, true, userCallBack);
+        NetUtils.postString(USER_LOGIN_URL, 1, json_str, userCallBack, true);
     }
 }

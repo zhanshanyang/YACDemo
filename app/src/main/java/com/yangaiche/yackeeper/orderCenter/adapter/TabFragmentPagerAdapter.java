@@ -1,4 +1,4 @@
-package com.yangaiche.yackeeper.adapter;
+package com.yangaiche.yackeeper.orderCenter.adapter;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

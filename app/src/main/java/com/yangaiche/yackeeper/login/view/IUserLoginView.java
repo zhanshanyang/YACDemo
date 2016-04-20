@@ -9,4 +9,7 @@ public interface IUserLoginView {
     String getUserPassword();
     void setUserName(String name);
     void setUserPasswpord(String psd);
+    void showProgressDialog();
+    void hideProgressDialog();
+    void loginSuccess();
 }

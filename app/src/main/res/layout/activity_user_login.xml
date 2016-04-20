@@ -60,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminate="true"
         style="@style/Widget.MaterialProgressBar.ProgressBar"
         android:visibility="gone"/>
 </RelativeLayout>

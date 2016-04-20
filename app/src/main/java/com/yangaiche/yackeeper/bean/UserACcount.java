@@ -3,16 +3,10 @@ package com.yangaiche.yackeeper.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by mr_yang on 16-3-21.
  */
-public class UserACcount implements Parcelable {
+public class UserAccount implements Parcelable {
 
     public String phone ;
     public String password;
@@ -22,9 +16,9 @@ public class UserACcount implements Parcelable {
     public String gender;
     private static boolean annotationMethod;
 
-    public UserACcount() {}
+    public UserAccount() {}
 
-    protected UserACcount(Parcel in) {
+    protected UserAccount(Parcel in) {
         phone = in.readString();
         password = in.readString();
         token = in.readString();
@@ -32,15 +26,15 @@ public class UserACcount implements Parcelable {
         gender = in.readString();
     }
 
-    public static final Creator<UserACcount> CREATOR = new Creator<UserACcount>() {
+    public static final Creator<UserAccount> CREATOR = new Creator<UserAccount>() {
         @Override
-        public UserACcount createFromParcel(Parcel in) {
-            return new UserACcount(in);
+        public UserAccount createFromParcel(Parcel in) {
+            return new UserAccount(in);
         }
 
         @Override
-        public UserACcount[] newArray(int size) {
-            return new UserACcount[size];
+        public UserAccount[] newArray(int size) {
+            return new UserAccount[size];
         }
     };
 

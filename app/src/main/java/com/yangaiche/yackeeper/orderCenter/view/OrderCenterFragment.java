@@ -1,4 +1,4 @@
-package com.yangaiche.yackeeper.fragment;
+package com.yangaiche.yackeeper.orderCenter.view;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yangaiche.yackeeper.R;
-import com.yangaiche.yackeeper.adapter.TabFragmentPagerAdapter;
-
-import java.util.List;
+import com.yangaiche.yackeeper.orderCenter.adapter.TabFragmentPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

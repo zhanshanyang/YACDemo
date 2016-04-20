@@ -1,13 +1,12 @@
-package com.yangaiche.yackeeper.utils;
+package com.yangaiche.yackeeper.login.utils;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.yangaiche.yackeeper.bean.UserACcount;
+import com.yangaiche.yackeeper.bean.UserAccount;
 import com.yangaiche.yackeeper.login.view.UserLoginActivity;
+import com.yangaiche.yackeeper.utils.MySharedPreferences;
 
 /**
  * Created by mr_yang on 16-3-21.
@@ -32,7 +31,7 @@ public class AcountUtils {
     }
 
     public static boolean hasAccount(Context context) {
-        UserACcount userACcount = (UserACcount) MySharedPreferences.getInstance().getString4Class(context, MySharedPreferences.USER_ACCOUNT_SP, UserACcount.class);
+        UserAccount userACcount = (UserAccount) MySharedPreferences.getInstance(context).getString4Class(MySharedPreferences.USER_ACCOUNT_SP, UserAccount.class);
         if(userACcount != null && userACcount.token != null){
             return true;
         }

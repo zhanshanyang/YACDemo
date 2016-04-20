@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.gson.Gson;
-
 /**
  * Created by mr_yang on 16-3-21.
  */
@@ -46,7 +44,7 @@ public class MySharedPreferences<T> {
      */
     public T getString4Class(String tag, Class<T> tClass){
         String str = getStr(tag);
-        T t = new Gson().fromJson(str, tClass);
+        T t = MyGson.getInstance().fromJson(str, tClass);
         return t;
     }
 
@@ -57,7 +55,7 @@ public class MySharedPreferences<T> {
      * @return
      */
     public boolean saveClass4String(String tag, Object object){
-        String str = new Gson().toJson(object);
+        String str = MyGson.getInstance().toJson(object);
         return saveStr(tag, str);
     }
 
