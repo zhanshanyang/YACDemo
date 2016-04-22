@@ -181,12 +181,6 @@ public class MainActivity extends MVPBaseActivity<IMainView, MainPresenter>
     }
 
     @Override
-    public void switch2Logout() {
-        getSupportFragmentManager().beginTransaction().add(R.id.container, OrderCenterFragment.newInstance("", "")).commit();
-        toolbar.setTitle(R.string.action_logout);
-    }
-
-    @Override
     public void switch2Setting() {
         getSupportFragmentManager().beginTransaction().add(R.id.container, OrderCenterFragment.newInstance("", "")).commit();
         toolbar.setTitle(R.string.action_settings);

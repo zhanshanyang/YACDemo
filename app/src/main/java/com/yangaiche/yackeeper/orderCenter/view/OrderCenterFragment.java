@@ -16,14 +16,6 @@ import com.yangaiche.yackeeper.orderCenter.adapter.TabFragmentPagerAdapter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OrderCenterFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link OrderCenterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrderCenterFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -33,7 +25,6 @@ public class OrderCenterFragment extends Fragment {
     @Bind(R.id.viewPager_order_center)
     ViewPager viewPager_order_center;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -75,8 +66,8 @@ public class OrderCenterFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TabFragmentPagerAdapter tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getFragmentManager());
-//        tabFragmentPagerAdapter.addTab(new OrderUnCompleteFragment(), "未完成订单");
-//        tabFragmentPagerAdapter.addTab(new OrderCompleteFragment(), "已完成订单");
+        tabFragmentPagerAdapter.addTab(new OrderUnCompleteFragment(), "未完成订单");
+        tabFragmentPagerAdapter.addTab(new OrderCompleteFragment(), "已完成订单");
         viewPager_order_center.setAdapter(tabFragmentPagerAdapter);
         viewPager_order_center.setOffscreenPageLimit(2);
         tab_order_center.setupWithViewPager(viewPager_order_center);
