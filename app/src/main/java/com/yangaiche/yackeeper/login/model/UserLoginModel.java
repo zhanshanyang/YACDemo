@@ -19,6 +19,6 @@ public class UserLoginModel implements IUserLoginModel {
         params.put("phone", userName);
         params.put("password", userPassword);
         String json_str = new Gson().toJson(params);
-        NetUtils.postString(USER_LOGIN_URL, 1, json_str, userCallBack, true);
+        NetUtils.postString(USER_LOGIN_URL, 1, json_str, userCallBack, false);
     }
 }

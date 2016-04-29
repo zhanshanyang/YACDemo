@@ -2,7 +2,7 @@ package com.yangaiche.yackeeper.utils;
 
 import com.yangaiche.yackeeper.base.Constants;
 import com.yangaiche.yackeeper.base.MyApplication;
-import com.yangaiche.yackeeper.login.model.UserCallBack;
+import com.yangaiche.yackeeper.bean.BaseCallback;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -21,9 +21,9 @@ public class NetUtils {
      * @param json_str      传递的文本
      * @param urlVersion    本接口是哪个版本
      * @param needToken     true:需要token false:不需要token
-     * @param userCallBack  返回调用
+     * @param callBack  返回调用
      */
-    public static void postString(String suburl, int urlVersion, String json_str, UserCallBack userCallBack, boolean needToken) {
+    public static void postString(String suburl, int urlVersion, String json_str, BaseCallback callBack, boolean needToken) {
         String url = getUrl(suburl, urlVersion);
         OkHttpUtils.postString()
                 .url(url)
@@ -32,7 +32,18 @@ public class NetUtils {
                 .content(json_str)
                 .tag(suburl)
                 .build()
-                .execute(userCallBack);
+                .execute(callBack);
+    }
+
+    public static void get(String suburl, int urlVersion, Map<String, String> params, BaseCallback callback, boolean needToken){
+        String url = getUrl(suburl, urlVersion);
+        OkHttpUtils.get()
+                .url(url)
+                .headers(getHeaders(needToken))
+                .params(params)
+                .tag(suburl)
+                .build()
+                .execute(callback);
     }
 
     private static String getUrl(String suburl, int urlVersion) {
@@ -45,9 +56,9 @@ public class NetUtils {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("API-Client-Device-Type", "android");
         headers.put("API-Client-App-Name", "yangaiche_keeper");
-        headers.put("API-Client-App-Version", "1.0");
+        headers.put("API-Client-App-Version",  MyApplication.getInstance().getVersionName());
         if(needToken)
-            headers.put("API-Client-App-Version", MyApplication.getInstance().getVersionName());
+            headers.put("API-Access-Token", MyApplication.getInstance().getUserToken());
         return headers;
     }
 

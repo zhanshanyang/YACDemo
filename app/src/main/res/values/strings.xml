@@ -13,4 +13,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="total_num_str">总个数（<xliff:g id="total_num">%d</xliff:g>）</string>
+    <string name="current_page_str">当前页码:<xliff:g id="current">%d</xliff:g>/<xliff:g id="total">%d</xliff:g></string>
 </resources>

@@ -8,4 +8,7 @@
     <color name="helf_transparent">#d0000000</color>
     <color name="yac_color">#04b96a</color>
     <color name="white">#FFFFFF</color>
+    <color name="grey">#808080</color>
+    <color name="line_color">#AAAAAA</color>
+    <color name="splite_line">#DDDDDD</color>
 </resources>

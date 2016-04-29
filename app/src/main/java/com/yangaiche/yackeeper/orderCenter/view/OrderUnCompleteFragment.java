@@ -18,7 +18,7 @@ import com.yangaiche.yackeeper.R;
 import com.yangaiche.yackeeper.base.BaseFragment;
 import com.yangaiche.yackeeper.bean.CarKeeperOrder;
 import com.yangaiche.yackeeper.bean.OrderPageDomain;
-import com.yangaiche.yackeeper.orderCenter.adapter.CompleteOrderAdapter;
+import com.yangaiche.yackeeper.orderCenter.adapter.UnCompleteOrderAdapter;
 import com.yangaiche.yackeeper.orderCenter.presenter.OrderListPresenter;
 
 import java.util.ArrayList;
@@ -27,8 +27,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class OrderCompleteFragment extends BaseFragment<IOrderListView, OrderListPresenter> implements IOrderListView {
-    private static String ORDER_STATUS = "completed";
+public class OrderUnCompleteFragment extends BaseFragment<IOrderListView, OrderListPresenter> implements IOrderListView {
+    private static String ORDER_STATUS = "uncompleted";
     @Bind(R.id.refresh)
     MaterialRefreshLayout refreshLayout;
     @Bind(R.id.total_num_tv)
@@ -38,10 +38,10 @@ public class OrderCompleteFragment extends BaseFragment<IOrderListView, OrderLis
     @Bind(R.id.recyclerview)
     RecyclerView recyclerView;
     @Bind(R.id.progress)
-    MaterialProgressBar progressBar;
+    MaterialProgressBar progress;
     private Activity activity;
 
-    private CompleteOrderAdapter mAdapter;
+    private UnCompleteOrderAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class OrderCompleteFragment extends BaseFragment<IOrderListView, OrderLis
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        mAdapter = new CompleteOrderAdapter(activity, new ArrayList<CarKeeperOrder>());
+        mAdapter = new UnCompleteOrderAdapter(activity, new ArrayList<CarKeeperOrder>());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -88,12 +88,12 @@ public class OrderCompleteFragment extends BaseFragment<IOrderListView, OrderLis
 
     @Override
     public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void dismissProgress() {
-        progressBar.setVisibility(View.GONE);
+        progress.setVisibility(View.GONE);
     }
 
     @Override
