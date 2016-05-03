@@ -86,7 +86,7 @@ public class UnCompleteOrderAdapter extends RecyclerView.Adapter<UnCompleteOrder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final CarKeeperOrder carKeeperOrder = datas.get(position);
         holder.order_id_tv.setText(carKeeperOrder.number);
         holder.order_status_tv.setText(mStatusMap.get(carKeeperOrder.status));
@@ -99,7 +99,9 @@ public class UnCompleteOrderAdapter extends RecyclerView.Adapter<UnCompleteOrder
             holder.order_consulted_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //updateOrderStart_Time(carKeeperOrder.id);
+                    if(adapterClickListener != null){
+                        adapterClickListener.updateOrderStartTime(carKeeperOrder.id, position);
+                    }
                 }
             });
         } else {
@@ -140,7 +142,15 @@ public class UnCompleteOrderAdapter extends RecyclerView.Adapter<UnCompleteOrder
                 holder.segment_time_tv.setText(dateFromUTC[1]);
             }
         }
-        /*if (App.gpsOn && (carKeeperOrder.id - App.gpsOrderid) == 0) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(adapterClickListener != null){
+                    adapterClickListener.clickItem(carKeeperOrder.id, position);
+                }
+            }
+        });
+        /*if (MyApplication.gpsOn && (carKeeperOrder.id - MyApplication.gpsOrderid) == 0) {
             holder.gps_img.setVisibility(View.VISIBLE);
         } else {
             holder.gps_img.setVisibility(View.GONE);
@@ -150,5 +160,15 @@ public class UnCompleteOrderAdapter extends RecyclerView.Adapter<UnCompleteOrder
     @Override
     public int getItemCount() {
         return datas.size();
+    }
+
+    private AdapterClickListener adapterClickListener;
+    public interface AdapterClickListener{
+        void updateOrderStartTime(Long id, int position);
+        void clickItem(Long id, int position);
+    }
+
+    public void setAdapterClickListener(AdapterClickListener listener){
+        this.adapterClickListener = listener;
     }
 }

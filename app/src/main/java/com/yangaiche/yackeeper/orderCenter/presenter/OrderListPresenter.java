@@ -1,11 +1,13 @@
 package com.yangaiche.yackeeper.orderCenter.presenter;
 
 import com.yangaiche.yackeeper.base.BasePresenter;
+import com.yangaiche.yackeeper.base.Constants;
 import com.yangaiche.yackeeper.bean.OrderPageDomain;
 import com.yangaiche.yackeeper.bean.ResponseBean;
 import com.yangaiche.yackeeper.orderCenter.model.IOrderCompleteModel;
 import com.yangaiche.yackeeper.orderCenter.model.OrderCompleteCallBack;
 import com.yangaiche.yackeeper.orderCenter.model.OrderCompleteModel;
+import com.yangaiche.yackeeper.orderCenter.model.OrderUpdateCallBack;
 import com.yangaiche.yackeeper.orderCenter.view.IOrderListView;
 import com.yangaiche.yackeeper.utils.ToastTip;
 
@@ -14,7 +16,7 @@ import okhttp3.Call;
 /**
  * Created by ui on 16/4/25.
  */
-public class OrderListPresenter extends BasePresenter<IOrderListView> {
+public class OrderListPresenter extends BasePresenter<IOrderListView> implements Constants{
 
     private static final int PAGE_SIZE = 5;
     private IOrderCompleteModel orderCompleteModel;
@@ -47,7 +49,6 @@ public class OrderListPresenter extends BasePresenter<IOrderListView> {
             @Override
             public void onAfter() {
                 getView().stopRefresh();
-                getView().stopLoadMore();
                 getView().dismissProgress();
             }
         });
@@ -89,7 +90,34 @@ public class OrderListPresenter extends BasePresenter<IOrderListView> {
 
             @Override
             public void onAfter() {
-                getView().stopRefresh();
+                getView().stopLoadMore();
+                getView().dismissProgress();
+            }
+        });
+    }
+
+    public void updateOrderStartTime(Long id, int position) {
+        getView().showProgress();
+        String note = "keeper changed";
+        orderCompleteModel.updateOrderStartTime(id, STATUS_CONFIRMED, note, new OrderUpdateCallBack(){
+
+            @Override
+            public void onError(Call call, Exception e) {
+                ToastTip.show("onError");
+            }
+
+            @Override
+            public void onResponse(ResponseBean<String> response) {
+                if(response != null && response.isSuccess() && response.data != null){
+                    refresh("uncompleted", 1);
+                }else if(response != null){
+                    ToastTip.show(response.message);
+                }
+            }
+
+            @Override
+            public void onAfter() {
+                getView().dismissProgress();
             }
         });
     }

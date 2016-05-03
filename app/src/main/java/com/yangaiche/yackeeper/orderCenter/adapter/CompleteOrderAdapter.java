@@ -73,7 +73,7 @@ public class CompleteOrderAdapter extends RecyclerView.Adapter<CompleteOrderAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final CarKeeperOrder carKeeperOrder = datas.get(position);
         holder.order_id_tv.setText(carKeeperOrder.number);
         holder.order_status_tv.setText("已完成");
@@ -92,19 +92,36 @@ public class CompleteOrderAdapter extends RecyclerView.Adapter<CompleteOrderAdap
         holder.time_tv.setText("完成时间");
         holder.order_consulted_tv.setVisibility(View.VISIBLE);
         holder.order_consulted_tv.setText("查看评论");
-        /*holder.order_consulted_tv.setOnClickListener(new View.OnClickListener() {
+        holder.order_consulted_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, OrderCommentActivity.class);
-                intent.putExtra(ORDER_ID, carKeeperOrder.id);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                if(adapterClickListener != null){
+                    adapterClickListener.openCommentActivity(carKeeperOrder.id, position);
+                }
             }
-        });*/
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(adapterClickListener != null){
+                    adapterClickListener.clickItem(carKeeperOrder.id, position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return datas.size();
+    }
+
+    private AdapterClickListener adapterClickListener;
+    public interface AdapterClickListener{
+        void openCommentActivity(Long id, int position);
+        void clickItem(Long id, int position);
+    }
+
+    public void setAdapterClickListener(AdapterClickListener listener){
+        this.adapterClickListener = listener;
     }
 }

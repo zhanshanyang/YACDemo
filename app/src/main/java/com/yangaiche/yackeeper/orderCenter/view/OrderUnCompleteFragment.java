@@ -1,25 +1,26 @@
 package com.yangaiche.yackeeper.orderCenter.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cjj.MaterialRefreshLayout;
-import com.cjj.MaterialRefreshListener;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yangaiche.yackeeper.R;
 import com.yangaiche.yackeeper.base.BaseFragment;
 import com.yangaiche.yackeeper.bean.CarKeeperOrder;
 import com.yangaiche.yackeeper.bean.OrderPageDomain;
+import com.yangaiche.yackeeper.order.view.OrderDetailsActivity;
 import com.yangaiche.yackeeper.orderCenter.adapter.UnCompleteOrderAdapter;
 import com.yangaiche.yackeeper.orderCenter.presenter.OrderListPresenter;
+import com.yangaiche.yackeeper.utils.ToastTip;
 
 import java.util.ArrayList;
 
@@ -27,16 +28,16 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class OrderUnCompleteFragment extends BaseFragment<IOrderListView, OrderListPresenter> implements IOrderListView {
+public class OrderUnCompleteFragment extends BaseFragment<IOrderListView, OrderListPresenter> implements IOrderListView, UnCompleteOrderAdapter.AdapterClickListener {
     private static String ORDER_STATUS = "uncompleted";
-    @Bind(R.id.refresh)
-    MaterialRefreshLayout refreshLayout;
     @Bind(R.id.total_num_tv)
     TextView total_num_tv;
     @Bind(R.id.current_page_tv)
     TextView current_page_tv;
     @Bind(R.id.recyclerview)
-    RecyclerView recyclerView;
+    XRecyclerView recyclerView;
+    @Bind(R.id.text_empty)
+    TextView text_empty;
     @Bind(R.id.progress)
     MaterialProgressBar progress;
     private Activity activity;
@@ -58,32 +59,38 @@ public class OrderUnCompleteFragment extends BaseFragment<IOrderListView, OrderL
     }
 
     private void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        recyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
+        recyclerView.setArrowImageView(R.drawable.iconfont_downgrey);
+        recyclerView.setLoadingMoreEnabled(false);
+        LinearLayoutManager manager = new LinearLayoutManager(activity);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
         mAdapter = new UnCompleteOrderAdapter(activity, new ArrayList<CarKeeperOrder>());
+        mAdapter.setAdapterClickListener(this);
         recyclerView.setAdapter(mAdapter);
+        recyclerView.setEmptyView(text_empty);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        refreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+        recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
-            public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
+            public void onRefresh() {
                 refresh();
             }
 
             @Override
-            public void onfinish() {
-                Toast.makeText(activity, "finish", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onRefreshLoadMore(final MaterialRefreshLayout materialRefreshLayout) {
-                mPresenter.loadMore(ORDER_STATUS);
+            public void onLoadMore() {
+                loadMore();
             }
         });
-        refresh();
+        recyclerView.setRefreshing(true);
     }
 
     private void refresh(){
         mPresenter.refresh(ORDER_STATUS, 1);
+    }
+
+    private void loadMore(){
+        mPresenter.loadMore(ORDER_STATUS);
     }
 
     @Override
@@ -112,21 +119,33 @@ public class OrderUnCompleteFragment extends BaseFragment<IOrderListView, OrderL
 
     @Override
     public void stopRefresh() {
-        refreshLayout.finishRefresh();
+        recyclerView.refreshComplete();
     }
 
     @Override
     public void stopLoadMore() {
-        refreshLayout.finishRefreshLoadMore();
+        recyclerView.loadMoreComplete();
     }
 
     @Override
     public void loadMoreEnable(boolean b) {
-        refreshLayout.setLoadMore(b);
+        recyclerView.setLoadingMoreEnabled(b);
     }
 
     @Override
     protected OrderListPresenter createPresenter() {
         return new OrderListPresenter();
+    }
+
+    @Override
+    public void updateOrderStartTime(Long id, int position) {
+        mPresenter.updateOrderStartTime(id, position);
+    }
+
+    @Override
+    public void clickItem(Long id, int position) {
+        ToastTip.show("position:"+position);
+        Intent intent = OrderDetailsActivity.makeIntent(activity, id, 0);
+        startActivity(intent);
     }
 }

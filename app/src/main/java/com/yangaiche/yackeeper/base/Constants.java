@@ -21,4 +21,8 @@ public interface Constants {
     String STATUS_EVALUATED = "evaluated";// 	已评价
     String STATUS_CANCELLED = "cancelled";//	已取消
     String STATUS_CLOSED = "closed";//	已关闭
+
+    String USER_TYPE = "keeper";
+    String ORDER_ID = "order_id";
+    String ADDITIONS_STR = "additions";
 }

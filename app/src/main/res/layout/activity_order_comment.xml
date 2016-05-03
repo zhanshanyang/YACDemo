@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/comment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_15dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/user_icon_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/default_user_icon" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/user_icon_img"
+                android:layout_marginLeft="@dimen/dimens_10dp"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/user_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/yac_color"
+                    android:textSize="@dimen/text_small_size" />
+
+                <TextView
+                    android:id="@+id/time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_assist9"
+                    android:textSize="@dimen/text_small_size" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/comment_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimens_5dp"
+            android:layout_marginTop="@dimen/dimens_5dp"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_small_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/service_little_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_10dp"
+                android:layout_marginRight="@dimen/dimens_10dp"
+                android:text="服务"
+                android:textColor="@color/text_assist"
+                android:textSize="@dimen/text_small_size" />
+
+            <RatingBar
+                android:id="@+id/service_rating"
+                style="@style/commentRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:layout_alignBottom="@+id/text4"
+                android:layout_toRightOf="@+id/text4"
+                android:numStars="5"
+                android:stepSize="1" />
+
+            <TextView
+                android:id="@+id/service_rating_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_20dp"
+                android:enabled="false"
+                android:text="分"
+                android:textColor="@color/pay_color"
+                android:textSize="@dimen/text_small_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/keeper_little_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_10dp"
+                android:layout_marginRight="@dimen/dimens_10dp"
+                android:text="管家"
+                android:textColor="@color/text_assist"
+                android:textSize="@dimen/text_small_size" />
+
+            <RatingBar
+                android:id="@+id/keeper_rating"
+                style="@style/commentRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:layout_alignBottom="@+id/text4"
+                android:layout_toRightOf="@+id/text4"
+                android:numStars="5"
+                android:stepSize="1" />
+
+            <TextView
+                android:id="@+id/keeper_rating_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_20dp"
+                android:enabled="false"
+                android:text="分"
+                android:textColor="@color/pay_color"
+                android:textSize="@dimen/text_small_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_max"
+        android:text="客户还没有评价服务，请提醒客户评价"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@style/Widget.MaterialProgressBar.ProgressBar"
+        android:visibility="gone" />
+</RelativeLayout>

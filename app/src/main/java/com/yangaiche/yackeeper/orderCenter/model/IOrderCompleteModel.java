@@ -6,4 +6,6 @@ package com.yangaiche.yackeeper.orderCenter.model;
 public interface IOrderCompleteModel {
 
     void getOrderData(String status, int page, int page_size, OrderCompleteCallBack orderCompleteCallBack);
+
+    void updateOrderStartTime(Long id, String statusConfirmed, String note, OrderUpdateCallBack orderUpdateCallBack);
 }

@@ -11,4 +11,9 @@
     <color name="grey">#808080</color>
     <color name="line_color">#AAAAAA</color>
     <color name="splite_line">#DDDDDD</color>
+    <color name="pay_color">#FF6600</color>
+    <color name="text_common">#333333</color>
+    <color name="text_assist">#666666</color>
+    <color name="text_assist9">#999999</color>
+    <color name="text_car_brand">#8e8e93</color>
 </resources>

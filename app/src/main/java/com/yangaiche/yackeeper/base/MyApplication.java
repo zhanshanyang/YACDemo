@@ -35,8 +35,6 @@ public class MyApplication extends Application{
         return context;
     }
 
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -65,6 +63,13 @@ public class MyApplication extends Application{
             userAccount = getUser();
         }
         return userAccount != null ? userAccount.token : null;
+    }
+
+    public Long getUserId(){
+        if(userAccount == null){
+            userAccount = getUser();
+        }
+        return userAccount != null ? userAccount.user_id : null;
     }
 
     public UserAccount getUserAccount(){
