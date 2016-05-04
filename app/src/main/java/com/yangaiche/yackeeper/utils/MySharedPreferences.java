@@ -59,4 +59,8 @@ public class MySharedPreferences<T> {
         return saveStr(tag, str);
     }
 
+    public boolean cleanSP(){
+        return mSP.edit().clear().commit();
+    }
+
 }

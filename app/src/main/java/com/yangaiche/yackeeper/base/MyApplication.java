@@ -77,4 +77,8 @@ public class MyApplication extends Application{
             userAccount = getUser();
         return userAccount;
     }
+
+    public void recycle(){
+        userAccount = null;
+    }
 }

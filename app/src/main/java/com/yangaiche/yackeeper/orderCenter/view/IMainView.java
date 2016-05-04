@@ -19,4 +19,6 @@ public interface IMainView {
     void switch2Version();
 
     void switch2Setting();
+
+    void logout();
 }

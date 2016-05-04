@@ -39,6 +39,8 @@ public class MainPresenter extends BasePresenter<IMainView> {
             getView().switch2Version();
         } else if (id == R.id.nav_settings) {
             getView().switch2Setting();
+        } else if (id == R.id.nav_logout){
+            getView().logout();
         }
 
     }

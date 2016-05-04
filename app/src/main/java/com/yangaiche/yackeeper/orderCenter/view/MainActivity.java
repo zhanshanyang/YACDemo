@@ -1,5 +1,6 @@
 package com.yangaiche.yackeeper.orderCenter.view;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,8 +20,11 @@ import android.widget.TextView;
 
 import com.yangaiche.yackeeper.R;
 import com.yangaiche.yackeeper.base.MVPBaseActivity;
+import com.yangaiche.yackeeper.base.MyApplication;
 import com.yangaiche.yackeeper.bean.UserAccount;
+import com.yangaiche.yackeeper.login.view.UserLoginActivity;
 import com.yangaiche.yackeeper.orderCenter.presenter.MainPresenter;
+import com.yangaiche.yackeeper.utils.MySharedPreferences;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -184,5 +188,15 @@ public class MainActivity extends MVPBaseActivity<IMainView, MainPresenter>
     public void switch2Setting() {
         getSupportFragmentManager().beginTransaction().add(R.id.container, OrderCenterFragment.newInstance("", "")).commit();
         toolbar.setTitle(R.string.action_settings);
+    }
+
+    @Override
+    public void logout() {
+        MyApplication.getInstance().recycle();
+        MySharedPreferences.getInstance(this).cleanSP();
+        Intent onAddedIntent = new Intent(this, MainActivity.class);
+        Intent intent = UserLoginActivity.makeIntent(this, onAddedIntent);
+        startActivity(intent);
+        finishView();
     }
 }
