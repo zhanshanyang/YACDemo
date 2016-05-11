@@ -9,7 +9,7 @@ import org.json.JSONObject;
 /**
  * Created by ui on 16/4/25.
  */
-public abstract class BaseCallback<T> extends Callback<T> {
+public abstract class BaseCallBack<T> extends Callback<T> {
 
     protected ResponseBean parseErrorNetWorkResponse(String content){
         try {

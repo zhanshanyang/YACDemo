@@ -2,7 +2,7 @@ package com.yangaiche.yackeeper.utils;
 
 import com.yangaiche.yackeeper.base.Constants;
 import com.yangaiche.yackeeper.base.MyApplication;
-import com.yangaiche.yackeeper.bean.BaseCallback;
+import com.yangaiche.yackeeper.bean.BaseCallBack;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class NetUtils {
      * @param needToken     true:需要token false:不需要token
      * @param callBack  返回调用
      */
-    public static void postString(String suburl, int urlVersion, String json_str, BaseCallback callBack, boolean needToken) {
+    public static void postString(String suburl, int urlVersion, String json_str, BaseCallBack callBack, boolean needToken) {
         String url = getUrl(suburl, urlVersion);
         OkHttpUtils.postString()
                 .url(url)
@@ -35,7 +35,7 @@ public class NetUtils {
                 .execute(callBack);
     }
 
-    public static void get(String suburl, int urlVersion, Map<String, String> params, BaseCallback callback, boolean needToken){
+    public static void get(String suburl, int urlVersion, Map<String, String> params, BaseCallBack callback, boolean needToken){
         String url = getUrl(suburl, urlVersion);
         OkHttpUtils.get()
                 .url(url)
